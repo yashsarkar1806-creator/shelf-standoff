@@ -1,0 +1,9 @@
+{
+  "name": "shelf-standoff",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test test/score.test.js"
+  }
+}

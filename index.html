@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shelf Standoff — 3 seconds to win the aisle</title>
+    <meta
+      name="description"
+      content="Design a fictional snack or drink pack, drop it on a supermarket shelf, and watch stylised shoppers react in three seconds. A playful FMCG brand game."
+    />
+    <meta name="theme-color" content="#0f2f2b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Lilita+One&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="floor">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <span class="burst" aria-hidden="true">3s</span>
+          <div>
+            <p class="kicker">Sunday Super · a fictional shop</p>
+            <h1>Shelf Standoff</h1>
+          </div>
+        </div>
+        <p class="lede">
+          You have three seconds of shelf time. Design a snack or a drink,
+          drop it in the bay, and see if stylised shoppers notice, linger, or
+          walk on. A playful FMCG brand game — not a lab study.
+        </p>
+      </header>
+
+      <main class="layout">
+        <section class="studio" aria-labelledby="studio-title">
+          <div class="studio-head">
+            <h2 id="studio-title">Design the pack</h2>
+            <p>All brands here are fictional. Make one up, or try a demo pack.</p>
+          </div>
+
+          <div class="demo-row" role="group" aria-label="Demo packs">
+            <button type="button" class="chip" data-demo="bolt-bite">Try Bolt Bite</button>
+            <button type="button" class="chip" data-demo="nimbu-folk">Try Nimbu Folk</button>
+            <button type="button" class="chip chip-ghost" data-demo="camouflage">Try a camouflage pack</button>
+          </div>
+
+          <div class="studio-grid">
+            <div class="preview-wrap">
+              <div id="pack-preview" class="pack-preview" aria-label="Live pack preview"></div>
+              <p class="preview-caption">Live mock-up · drag nothing, just tweak the dials</p>
+            </div>
+
+            <form id="pack-form" class="pack-form" autocomplete="off">
+              <label>
+                Brand name
+                <input id="f-name" name="name" maxlength="40" required placeholder="BOLT BITE" />
+              </label>
+              <label>
+                Flavour
+                <input id="f-flavour" name="flavour" maxlength="40" required placeholder="Raw mango chilli" />
+              </label>
+              <label class="span-2">
+                Claim <span class="hint">aim for 3–5 words</span>
+                <input id="f-claim" name="claim" maxlength="80" placeholder="The tang that talks back" />
+              </label>
+              <label>
+                Category
+                <select id="f-category" name="category"></select>
+              </label>
+              <label>
+                Shape
+                <select id="f-shape" name="shape"></select>
+              </label>
+              <label>
+                Price (₹)
+                <input id="f-price" name="price" type="number" min="1" max="999" step="1" required />
+              </label>
+              <label>
+                The bay
+                <select id="f-bay" name="bay"></select>
+              </label>
+              <div class="colours span-2">
+                <label>
+                  Pack colour
+                  <input id="f-primary" name="primary" type="color" value="#C8F542" />
+                </label>
+                <label>
+                  Accent
+                  <input id="f-accent" name="accent" type="color" value="#FF3D8A" />
+                </label>
+                <label>
+                  Type colour
+                  <input id="f-text" name="text" type="color" value="#121212" />
+                </label>
+              </div>
+            </form>
+          </div>
+
+          <p id="bay-blurb" class="bay-blurb"></p>
+
+          <div class="cta-row">
+            <button type="button" id="drop-btn" class="drop-btn">Drop on the shelf</button>
+            <button type="button" id="remix-btn" class="text-btn">New walk-by</button>
+          </div>
+        </section>
+
+        <section class="aisle" aria-labelledby="aisle-title">
+          <div class="aisle-sign">
+            <div>
+              <p class="sign-kicker">Aisle 3</p>
+              <h2 id="aisle-title">The standoff</h2>
+            </div>
+            <div class="timer" id="timer" aria-live="polite">Ready</div>
+          </div>
+
+          <div class="shelf-stage" id="shelf-stage">
+            <div class="fluorescent" aria-hidden="true"></div>
+            <p class="shelf-label" id="shelf-label">Kids snack bay</p>
+            <div class="shelf-bay">
+              <div class="shelf-packs" id="shelf-packs"></div>
+              <div class="shelf-board" aria-hidden="true"></div>
+              <div class="shelf-edge" aria-hidden="true"></div>
+            </div>
+            <div class="walkway" id="walkway" aria-label="Stylised shoppers"></div>
+          </div>
+
+          <section class="results" id="results" hidden>
+            <div class="scoreboard">
+              <div class="grade-card">
+                <p class="grade-kicker">The verdict</p>
+                <p class="grade-label" id="grade-label"></p>
+                <p class="grade-line" id="grade-line"></p>
+                <p class="grab-line" id="grab-line"></p>
+              </div>
+              <ul class="meters" id="meters"></ul>
+            </div>
+
+            <div class="shopper-log">
+              <h3>Who walked by</h3>
+              <p class="fine">Ten stylised, synthetic shoppers. Illustrative, not a real panel.</p>
+              <ul id="shopper-list"></ul>
+            </div>
+
+            <div class="readout">
+              <h3>Marketer’s readout</h3>
+              <ul id="readout-list"></ul>
+            </div>
+
+            <div class="launch">
+              <h3>A tiny launch kit</h3>
+              <dl id="launch-kit"></dl>
+            </div>
+
+            <div class="result-actions">
+              <button type="button" id="card-btn" class="drop-btn drop-btn-small">Download result card</button>
+              <a class="text-btn" href="#studio-title">Remix the pack</a>
+            </div>
+            <p class="disclaimer" id="disclaimer"></p>
+          </section>
+        </section>
+      </main>
+
+      <footer class="site-foot">
+        <p>
+          A portfolio project by <strong>Yash Sarkar</strong> · Master of Marketing (UWA).
+          Built as a playful FMCG brand exercise. All packs, shoppers, scores and launch
+          ideas are fictional and illustrative. Not affiliated with any real retailer or brand.
+        </p>
+        <p>
+          <a href="https://github.com/yashsarkar1806-creator/shelf-standoff">Source on GitHub</a>
+          · MIT licence
+        </p>
+      </footer>
+    </div>
+
+    <canvas id="share-card" width="1080" height="1350" hidden></canvas>
+    <script src="score.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
